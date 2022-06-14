@@ -1,22 +1,20 @@
 <template>
   <div>
-    <b-table striped hover :items="header.items"></b-table>
+    <table border="1">
+      <tr>
+        <th>ID</th>
+        <th>Title</th>
+        <th>Body</th>
+        <th>User created</th>
+        <th colspan="2">Actions</th>
+      </tr>
+      <slot name="renderPost"> </slot>
+    </table>
   </div>
 </template>
 <script>
-  export default {
-    props: {
-      header: Object
-    }
-    // data() {
-    //   return {
-    //     items: [
-    //       { age: 40, first_name: 'Dickerson', last_name: 'Macdonald' },
-    //       { age: 21, first_name: 'Larsen', last_name: 'Shaw' },
-    //       { age: 89, first_name: 'Geneva', last_name: 'Wilson' },
-    //       { age: 38, first_name: 'Jami', last_name: 'Carney' }
-    //     ]
-    //   }
-    // }
-  }
+export default {}
+
 </script>
+<style scoped>
+</style>
