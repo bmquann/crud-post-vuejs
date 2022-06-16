@@ -1,7 +1,9 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import HomeView from '../views/HomeView.vue'
-import AboutView from '../views/AboutView.vue'
+import CreatePost from '../views/CreatePost.vue'
+import UpdatePost from '../views/UpdatePost.vue'
+
 Vue.use(VueRouter)
 
 const routes = [
@@ -13,8 +15,14 @@ const routes = [
   {
     path: '/create',
     name: 'cretae',
-    component: AboutView
+    component: CreatePost
+  },
+  {
+    path: '/:id/update',
+    name: 'update',
+    component: UpdatePost
   }
+
 ]
 
 const router = new VueRouter({

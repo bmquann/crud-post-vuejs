@@ -2,7 +2,7 @@
   <div id="app">
     <nav>
       <router-link to="/">Home</router-link> |
-      <router-link to="/create"><a class="button primary new"><font-awesome-icon icon="fa-solid fa-plus" />&nbsp;New Post</a></router-link>
+      <router-link to="/create"><a class="button primary "><font-awesome-icon icon="fa-solid fa-plus" />&nbsp;New Post</a></router-link>
     </nav>
     <router-view/>
   </div>
@@ -46,6 +46,7 @@ nav a.router-link-exact-active {
   line-height:35px;
   transition:ease-in-out .2s;
   padding: 0 10px;
+  color:black
 }
 
 .primary:hover, .condensed:hover, .touch:hover {

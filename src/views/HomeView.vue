@@ -1,8 +1,5 @@
 <template>
   <div>
-    <!-- <div class="card-body">
-            <div v-for="item in pageOfItems" :key="item.id">{{item}}</div>
-        </div> -->
     <post-table
       :header="{
         posts,
@@ -15,18 +12,22 @@
         :item="item"
       ></PostTr
     ></post-table>
-    <jw-pagination :pageSize="10" :items="posts" @changePage="onChangePage"></jw-pagination>
+    <jw-pagination
+      :pageSize="10"
+      :items="posts"
+      @changePage="onChangePage"
+    ></jw-pagination>
   </div>
 </template>
 <script>
 import PostTable from "../components/PostTable.vue";
 import PostTr from "../components/PostTr.vue";
 export default {
-  components: { PostTable, PostTr},
+  components: { PostTable, PostTr },
   data() {
-return{
-  pageOfItems: []
-}
+    return {
+      pageOfItems: [],
+    };
   },
   computed: {
     posts() {
@@ -37,11 +38,10 @@ return{
     this.$store.dispatch("getData");
   },
   methods: {
-        onChangePage(pageOfItems) {
-            // update page of items
-            this.pageOfItems = pageOfItems;
-        }
-    }
+    onChangePage(pageOfItems) {
+      this.pageOfItems = pageOfItems;
+    },
+  },
 };
 </script>
 <style>
@@ -55,7 +55,7 @@ th,
 td {
   padding: 10px;
 }
-table{
+table {
   margin-bottom: 5px;
 }
 </style>

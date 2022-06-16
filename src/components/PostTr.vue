@@ -1,32 +1,25 @@
 
 <template>
   <tr>
-    
     <td>{{ item.id }}</td>
     <td>{{ item.title }}</td>
     <td>{{ item.body }}</td>
     <td>{{ item.userId }}</td>
     <td>
-      <a class="button touch edit">
-        <font-awesome-icon icon="fa-solid fa-pen"
-      /></a>
+      <router-link :to="{ name: 'update', params: { id: item.id } }"
+        ><a class="button touch edit">
+          <font-awesome-icon icon="fa-solid fa-pen" /></a
+      ></router-link>
     </td>
-<td>
-      <button  @click="deletePost(item.id)"  class="button touch delete">
-        <font-awesome-icon icon="fa-solid fa-trash-can" />
-    </button>
-</td>
-    <!-- <button >click</button> -->
-    <!-- <td>
-      <button  class="button touch delete">
+    <td>
+      <button @click="deletePost(item.id)" class="button touch delete">
         <font-awesome-icon icon="fa-solid fa-trash-can" />
       </button>
-    </td> -->
+    </td>
   </tr>
 </template>
 
 <script>
-
 export default {
   props: {
     item: {
@@ -35,11 +28,10 @@ export default {
     },
   },
   methods: {
-    deletePost(postId){
-      this.$store.commit('DELETE_POST',postId);
-      alert('Post deleted successfully')
-    }
-
+    deletePost(postId) {
+      this.$store.commit("DELETE_POST", postId);
+      alert("Post deleted successfully");
+    },
   },
 };
 </script>
