@@ -1,15 +1,8 @@
 <template>
-  <label :for="id"
-    ><slot></slot>
-    <input
-      :type="type"
-      :id="id"
-      :name="id"
-      v-model="inputValue"
-      :placeholder="placeholder"
-      @blur="handleChange"
-      :class="{ error: isError }"
-    />
+  <label :for="id">
+    <slot></slot>
+    <input :type="type" :id="id" :name="id" v-model="inputValue" :placeholder="placeholder" @blur="handleChange"
+      :class="{ error: isError }" />
     <p v-if="isError" class="message">{{ errorMessage }}</p>
   </label>
 </template>
@@ -42,12 +35,15 @@ export default {
   },
   computed: {
     isError() {
-      return this.errorMessage?.length !== 0 ? true : false;
+      return !!(this.errorMessage?.length)
     },
   },
   watch: {
-    value(newVal) {
-      this.inputValue = newVal;
+    value: {
+      immediate: true,
+      handler(newVal) {
+        this.inputValue = newVal;
+      }
     },
   },
   methods: {
@@ -56,7 +52,7 @@ export default {
       this.$emit("input", this.inputValue);
     },
     handleValidate(value) {
-      if (value.length < 1) {
+      if (!(value.length)) {
         this.errorMessage = "This field is required!";
         return;
       }
@@ -73,6 +69,7 @@ label {
   display: block;
   margin-bottom: 6px;
 }
+
 input {
   color: #586068;
   font-size: 16px;
@@ -83,18 +80,22 @@ input {
   outline: 3px solid transparent;
   transition: all 0.2s ease;
 }
+
 input:focus {
   outline: 3px solid #c2d9fb;
   box-shadow: unset;
   border: 1px solid transparent;
 }
+
 .error {
   box-shadow: 0 0 4px #f4b6c1;
   border: 1px solid #aa4651;
 }
+
 .error:focus {
   outline: 3px solid #f4b6c1;
 }
+
 .message {
   color: #aa4651;
   font-size: 12px;

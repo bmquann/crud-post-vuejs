@@ -2,18 +2,22 @@
   <div>
     <table border="1">
       <tr>
-        <th>ID</th>
-        <th>Title</th>
-        <th>Body</th>
-        <th>User created</th>
-        <th colspan="2">Actions</th>
+        <th  v-for="(item) in table.th" :key="item.name" :colspan="item.colspan" >{{item.name}}</th>
       </tr>
-      <slot name="renderPost"> </slot>
+      <slot name="renderPost"></slot> 
+
     </table>
   </div>
 </template>
 <script>
-export default {}
+import { mapState } from 'vuex'
+export default {
+  computed: {
+    ...mapState({
+      table: state => state.table
+      })
+  }
+}
 
 </script>
 <style scoped>

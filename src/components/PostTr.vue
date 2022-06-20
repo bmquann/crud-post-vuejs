@@ -1,14 +1,12 @@
 
 <template>
   <tr>
-    <td>{{ item.id }}</td>
-    <td>{{ item.title }}</td>
-    <td>{{ item.body }}</td>
-    <td>{{ item.userId }}</td>
+    <td v-for="(data, index) in data" :key="index">{{ item[data] }}</td>
     <td>
+
       <router-link :to="{ name: 'update', params: { id: item.id } }"
         ><a class="button touch edit">
-          <font-awesome-icon icon="fa-solid fa-pen" /></a
+          <font-awesome-icon icon="fa-solid fa-pen" /> </a
       ></router-link>
     </td>
     <td>
@@ -20,6 +18,7 @@
 </template>
 
 <script>
+import { mapState } from "vuex";
 export default {
   props: {
     item: {
@@ -27,10 +26,18 @@ export default {
       required: true,
     },
   },
+  computed: {
+    ...mapState({
+      data: (state) => state.data,
+    }),
+  },
   methods: {
     deletePost(postId) {
       this.$store.commit("DELETE_POST", postId);
       alert("Post deleted successfully");
+    },
+    log(msg) {
+      console.log(msg);
     },
   },
 };
