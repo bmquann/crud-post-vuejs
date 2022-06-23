@@ -2,7 +2,7 @@
   <div>
     <table border="1">
       <tr>
-        <th  v-for="(item) in table.th" :key="item.name" :colspan="item.colspan" >{{item.name}}</th>
+        <th  v-for="(item) in table" :key="item.id" :colspan="item.colspan" >{{item.display}}</th>
       </tr>
       <slot name="renderPost"></slot> 
 

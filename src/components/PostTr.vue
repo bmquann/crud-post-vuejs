@@ -1,7 +1,7 @@
 
 <template>
   <tr>
-    <td v-for="(data, index) in data" :key="index">{{ item[data] }}</td>
+    <td v-for=" data in table" :key="data.id" v-show="data.name">{{ item[data.name] }} </td>
     <td>
 
       <router-link :to="{ name: 'update', params: { id: item.id } }"
@@ -28,7 +28,7 @@ export default {
   },
   computed: {
     ...mapState({
-      data: (state) => state.data,
+      table: (state) => state.table,
     }),
   },
   methods: {

@@ -62,8 +62,7 @@ export default {
   },
   methods: {
     async handleCreate() {
-      let post = await this.$store.dispatch("createPost", this.newPost);
-      alert("Add Completed Post ID = "+ post.id + ", Title = " + post.title)
+      await this.$store.dispatch("createPost", this.newPost);
       this.$router.push({ name: "home" });
     },
   },

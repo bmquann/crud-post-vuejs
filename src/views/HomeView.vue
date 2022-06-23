@@ -36,7 +36,7 @@ export default {
   computed: {
     ...mapState({
       table: state => state.table,
-      posts: state => state.posts
+      posts: state => state.posts,
     }),
      displayedPosts () {
       return this.paginate(this.posts);

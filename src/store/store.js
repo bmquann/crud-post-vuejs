@@ -9,32 +9,38 @@ Vue.use(Vuex);
 export default new Vuex.Store({
     state: {
         posts: [],
-        table: {
-            th: [
-                {
-                    name: 'ID',
-                    colspan: 1,
-                    
-                },
-                {
-                    name: 'Title',
-                    colspan: 1
-                },
-                {
-                    name: 'Body',
-                    colspan: 1
-                },
-                {
-                    name: 'User Created',
-                    colspan: 1
-                },
-                {
-                    name: 'Actions',
-                    colspan: 2
-                },
-            ]
-        },
-        data: ['id','title', 'body','userId']
+        table: [
+            {
+                id: 1,
+                display: 'ID',
+                name: 'id',
+                colspan: 1,
+
+            },
+            {
+                id: 2,
+                display: 'Title',
+                name: 'title',
+                colspan: 1,
+            },
+            {
+                id: 3,
+                display: 'Body',
+                name: 'body',
+                colspan: 1
+            },
+            {
+                id: 4,
+                display: 'User Created',
+                name: 'userId',
+                colspan: 1
+            },
+            {
+                id: 5,
+                display: 'Actions',
+                colspan: 2
+            },
+        ],
     },
     mutations: {
         SET_POSTS(state, data) {
@@ -52,34 +58,50 @@ export default new Vuex.Store({
     },
     actions: {
         async getData({ commit }) {
-            let response = await API.get(`posts`)
-            commit('SET_POSTS', response.data)
+            await API.get(`posts`)
+                .then((res) => {
+                    commit('SET_POSTS', res.data)
+                })
+                .catch((err) => {
+                    console.log(err)
+                })
         },
 
         async deleteData({ commit }, postId) {
-            let response = await API.delete('posts', postId);
-            if (response.status == 200 || response.status == 204) {
-                commit('DELETE_POST', postId)
-            }
-            else {
-                alert("Can not delete this post!!")
-            }
+            await API.delete('posts', postId)
+                .then(() => {
+                    commit('DELETE_POST', postId)
+                })
+                .catch((err) => {
+                    console.log(err)
+                    alert("Can not delete this post!!")
+                })
         },
 
         async updatePost({ commit }, post) {
-            let response = await API.put(`posts/${post.id}`, JSON.stringify(post));
-            const newPost = response.data;
-            console.log(response)
-            commit('UPDATE_POST', newPost)
-            return newPost
+            await API.put(`posts/${post.id}`, JSON.stringify(post))
+                .then((res) => {
+                    const newPost = res.data;
+                    commit('UPDATE_POST', newPost)
+                    alert("Update Post ID= " + newPost.id +" Successfully" )
+                })
+                .catch((err) => {
+                     alert(err)
+                })
+
         },
 
         async createPost({ commit }, post) {
-            let response = await API.post(`posts`, post);
-            let newPost = response.data;
-            console.log(newPost)
-            commit('CREATE_POST', newPost)
-            return newPost
+            await API.post(`posts`, post)
+                .then((res) => {
+                    let newPost = res.data;
+                    commit('CREATE_POST', newPost)
+                    alert("Created Post ID= " + newPost.id +" Successfully" )
+                })
+                .catch((err) => {
+                     alert(err)
+                })
+
         }
     },
     getters: {

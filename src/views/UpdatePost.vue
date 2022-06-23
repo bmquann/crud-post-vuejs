@@ -39,8 +39,7 @@ export default {
   },
   methods: {
     async handleUpdate() {
-      let newPost = await this.$store.dispatch("updatePost", this.postUpdate);
-      alert("Update Completed Post ID = " + newPost.id)
+      await this.$store.dispatch("updatePost", this.postUpdate);
       this.$router.push({ name: "home" });
     },
   },
