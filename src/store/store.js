@@ -58,50 +58,45 @@ export default new Vuex.Store({
     },
     actions: {
         async getData({ commit }) {
-            await API.get(`posts`)
-                .then((res) => {
-                    commit('SET_POSTS', res.data)
-                })
-                .catch((err) => {
-                    console.log(err)
-                })
+            try {
+                const res = await API.get(`posts`)
+                commit('SET_POSTS', res.data)
+            }
+            catch {
+                console.log("Can not get data")
+            }
         },
 
         async deleteData({ commit }, postId) {
-            await API.delete('posts', postId)
-                .then(() => {
-                    commit('DELETE_POST', postId)
-                })
-                .catch((err) => {
-                    console.log(err)
-                    alert("Can not delete this post!!")
-                })
+            try {
+                const res = await API.delete('posts', postId)
+                commit('DELETE_POST', res.data)
+            }
+            catch {
+                alert("Can not delete this post!!")
+            }
         },
 
         async updatePost({ commit }, post) {
-            await API.put(`posts/${post.id}`, JSON.stringify(post))
-                .then((res) => {
-                    const newPost = res.data;
-                    commit('UPDATE_POST', newPost)
-                    alert("Update Post ID= " + newPost.id +" Successfully" )
-                })
-                .catch((err) => {
-                     alert(err)
-                })
-
+            try {
+                const res = await API.put(`posts/${post.id}`, JSON.stringify(post))
+                commit('UPDATE_POST', res.data)
+                alert("Update Post ID= " + res.data.id + " Successfully")
+            }
+            catch {
+                console.log("Can not update this post!!")
+            }
         },
 
         async createPost({ commit }, post) {
-            await API.post(`posts`, post)
-                .then((res) => {
-                    let newPost = res.data;
-                    commit('CREATE_POST', newPost)
-                    alert("Created Post ID= " + newPost.id +" Successfully" )
-                })
-                .catch((err) => {
-                     alert(err)
-                })
-
+            try {
+                const res = await API.post(`posts`, post)
+                commit('CREATE_POST', res.data)
+                alert("Created Post ID= " + res.data.id + " Successfully")
+            }
+            catch {
+                alert("Can not create this post!!")
+            }
         }
     },
     getters: {
